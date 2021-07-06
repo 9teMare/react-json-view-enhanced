@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/react-json-view.iml" filepath="$PROJECT_DIR$/.idea/react-json-view.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/react-json-view-enhanced.iml" filepath="$PROJECT_DIR$/.idea/react-json-view-enhanced.iml" />
     </modules>
   </component>
 </project>

@@ -1,7 +1,7 @@
 {
-    "name": "react-json-view",
+    "name": "react-json-view-enhanced",
     "description": "Interactive react component for displaying javascript arrays and JSON objects.",
-    "version": "1.21.3",
+    "version": "1.0.0",
     "main": "dist/main.js",
     "dependencies": {
         "flux": "^4.0.1",
@@ -68,7 +68,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/mac-s-g/react-json-view.git"
+        "url": "https://github.com/kongxiaojun/react-json-view-enhanced.git"
     },
     "keywords": [
         "array-viewer",
@@ -93,11 +93,11 @@
         "treeview"
     ],
     "license": "MIT",
-    "author": "Mac Gainor",
+    "author": "kongxiaojun",
     "bugs": {
-        "url": "https://github.com/mac-s-g/react-json-view/issues"
+        "url": "https://github.com/kongxiaojun/react-json-view-enhanced/issues"
     },
-    "homepage": "https://github.com/mac-s-g/react-json-view",
+    "homepage": "https://github.com/kongxiaojun/react-json-view-enhanced",
     "directories": {
         "docs": "docs",
         "test": "test"
