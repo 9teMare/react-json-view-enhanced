@@ -33,6 +33,6 @@ describe("<AddKeyRequest />", function() {
             <AddKeyRequest active={true} theme="rjv-default" rjvId={rjvId} />
         )
 
-        expect(wrapper.find(".key-modal-input").length).to.equal(1)
+        expect(wrapper.find(".key-modal-input").length).to.equal(2)
     })
 })
