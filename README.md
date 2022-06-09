@@ -3,40 +3,53 @@
 [![npm](https://img.shields.io/npm/v/react-json-view.svg)](https://www.npmjs.com/package/react-json-view-enhanced) [![npm](https://img.shields.io/npm/l/react-json-view-enhanced.svg)](https://github.com/kongxiaojun/react-json-view-enhanced/blob/master/LISCENSE) [![Build Status](https://travis-ci.org/mac-s-g/react-json-view.svg)](https://travis-ci.org/mac-s-g/react-json-view) [![Coverage Status](https://coveralls.io/repos/github/kongxiaojun/react-json-view-enhanced/badge.svg?branch=master)](https://coveralls.io/github/kongxiaojun/react-json-view-enhanced?branch=master)
 
 # react-json-view-with-toggle
-This package is built on top of [react-json-view (RJV)](https://www.npmjs.com/package/react-json-view) and [react-json-view-enhanced](https://www.npmjs.com/package/react-json-view-enhanced). The main add-on of this package on top of the two is to display boolean values as toggles, this make viewing boolean values intuitive and editing more convenient (just by flipping the toggle).
+This package is built on top of [react-json-view (RJV)](https://www.npmjs.com/package/react-json-view) and [react-json-view-enhanced](https://www.npmjs.com/package/react-json-view-enhanced). The main add-on of this package on top of the two is to display boolean values as toggles, this make viewing boolean values intuitive and editing more convenient (just by flipping the toggle). In addition, the original two packages lack documentation on how to use properly with Server-Side Rendering, which is included in this package.
 
+<br/>
+Below is the original README:<br/>
 RJV is a React component for displaying and editing javascript **arrays** and **JSON objects**.
-
 This component provides a responsive interface for displaying arrays or JSON in a web browser.  NPM offers a distribution of the source that's transpiled to ES5; so you can include this component with *any web-based javascript application*.
 
-[Check out the Interactive Demo](https://github.com/kongxiaojun/react-json-view-enhanced/demo/dist/)
+[Check out the Interactive Demo](https://mac-s-g.github.io/react-json-view/demo/dist/)
 
 
 ### Implementation Example
+Client-Side Rendering
 ```js
-// import the react-json-view-enhanced component
-import ReactJson from 'react-json-view-enhanced'
+// import the react-json-view-with-toggle component
+import ReactJson from 'react-json-view-with-toggle'
 
 // use the component in your app!
 <ReactJson src={my_json_object} />
 ```
 
+Server-Side Rendering
+```js
+// import the react-json-view-with-toggle component after the document object is ready
+const DynamicLazyReactJsonView = dynamic(() => import ('react-json-view-with-toggle'), {suspense: true})
+
+// wrap the component in Suspense and use in your app!
+<Suspense fallback={`loading`}>
+  <DynamicLazyReactJsonView src={my_json_object}/>
+</Suspense>
+```
+
 ### Output Examples
+#### The original package:
 #### Default Theme
-![alt text](https://github.com/kongxiaojun/react-json-view-enhanced/blob/master/doc/output-example-15.png?raw=true "Output Example 1")
+![alt text](./doc/output-example-12.png "Output Example 1")
 #### Hopscotch Theme, with Triangle Icons:
-![alt text](https://github.com/kongxiaojun/react-json-view-enhanced/blob/master/doc/output-example-14.png?raw=true "Output Example 2")
+![alt text](./doc/output-example-monokai-2.png "Output Example 2")
+
+#### This package:
+![alt text](./doc/with-toggle-1.png "Output Example with toggle")
+
+Notice how boolean values are displayed as toggles, and they can be edited by simply flipping the toggle.
 
 ### Installation Instructions
-Install this component with [NPM](https://www.npmjs.com/package/react-json-view-enhanced).
+Install this component with [NPM](https://www.npmjs.com/package/react-json-view-with-toggle).
 ```shell
-npm install --save react-json-view-enhanced
-```
-Or add to your package.json config file:
-```json
-"dependencies": {
-    "react-json-view-enhanced": "latest"
-}
+npm install --save react-json-view-with-toggle
 ```
 
 ### Props

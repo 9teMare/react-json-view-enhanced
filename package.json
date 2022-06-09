@@ -1,7 +1,7 @@
 {
   "name": "react-json-view-with-toggle",
   "description": "Interactive react component for displaying javascript arrays and JSON objects, enhanced by displaying boolean values as toggles.",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "dist/main.js",
   "files": [
     "dist"
