@@ -22,7 +22,7 @@ import {
     JsonUndefined
 } from './DataTypes/DataTypes';
 
-//clibboard icon
+//clipboard icon
 import { Edit, CheckCircle, RemoveCircle as Remove } from './icons';
 
 //theme
