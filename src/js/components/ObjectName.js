@@ -16,10 +16,10 @@ export default function getObjectName(props) {
 
     if (jsvRoot && (name === false || name === null)) {
         return <span />;
-    } else if (parent_type == 'array') {
+    } else if (parent_type === 'array') {
         return displayArrayKey ? (
             <span {...Theme(theme, 'array-key')} key={namespace}>
-                <span class="array-key">{display_name}</span>
+                <span className="array-key">{display_name}</span>
                 <span {...Theme(theme, 'colon')}>:</span>
             </span>
         ) : (
@@ -28,7 +28,7 @@ export default function getObjectName(props) {
     } else {
         return (
             <span {...Theme(theme, 'object-name')} key={namespace}>
-                <span class="object-key">
+                <span className="object-key">
                     {quotesOnKeys && (
                         <span style={{ verticalAlign: 'top' }}>"</span>
                     )}

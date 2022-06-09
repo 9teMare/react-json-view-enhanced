@@ -1,6 +1,6 @@
 import React from 'react';
 import DataTypeLabel from './DataTypeLabel';
-import { toType } from './../../helpers/util';
+import { toType } from '../../helpers/util';
 
 //theme
 import Theme from './../../themes/getStyle';
@@ -62,7 +62,7 @@ export default class extends React.PureComponent {
             <div {...Theme(theme, 'string')}>
                 <DataTypeLabel type_name={type_name} {...props} />
                 <span
-                    class="string-value"
+                    className="string-value"
                     {...style}
                     onClick={this.toggleCollapsed}
                 >

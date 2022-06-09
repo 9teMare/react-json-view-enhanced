@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import AutosizeTextarea from 'react-textarea-autosize';
 import { toType } from '../helpers/util';
 import dispatcher from './../helpers/dispatcher';
@@ -59,7 +59,6 @@ class VariableEditor extends React.PureComponent {
             onSelect,
             displayArrayKey,
             quotesOnKeys,
-            fixedType
         } = this.props;
         const { editMode } = this.state;
         return (
@@ -73,7 +72,7 @@ class VariableEditor extends React.PureComponent {
                 onMouseLeave={() =>
                     this.setState({ ...this.state, hovered: false })
                 }
-                class="variable-row"
+                className="variable-row"
                 key={variable.name}
             >
                 {type === 'array' ? (
@@ -90,7 +89,7 @@ class VariableEditor extends React.PureComponent {
                     <span>
                         <span
                             {...Theme(theme, 'object-name')}
-                            class="object-key"
+                            className="object-key"
                             key={variable.name + '_' + namespace}
                         >
                             {!!quotesOnKeys && (
@@ -107,7 +106,7 @@ class VariableEditor extends React.PureComponent {
                     </span>
                 )}
                 <div
-                    class="variable-value"
+                    className="variable-value"
                     onClick={
                         onSelect === false && onEdit === false
                             ? null
@@ -142,10 +141,10 @@ class VariableEditor extends React.PureComponent {
                         {...{ theme, namespace: [...namespace, variable.name] }}
                     />
                 ) : null}
-                {onEdit !== false && editMode == false
+                {onEdit !== false && editMode === false
                     ? this.getEditIcon()
                     : null}
-                {onDelete !== false && editMode == false
+                {onDelete !== false && editMode === false
                     ? this.getRemoveIcon()
                     : null}
             </div>
@@ -157,7 +156,7 @@ class VariableEditor extends React.PureComponent {
 
         return (
             <div
-                class="click-to-edit"
+                className="click-to-edit"
                 style={{
                     verticalAlign: 'top',
                     display: this.state.hovered ? 'inline-block' : 'none'
@@ -195,7 +194,7 @@ class VariableEditor extends React.PureComponent {
 
         return (
             <div
-                class="click-to-remove"
+                className="click-to-remove"
                 style={{
                     verticalAlign: 'top',
                     display: this.state.hovered ? 'inline-block' : 'none'
@@ -250,7 +249,7 @@ class VariableEditor extends React.PureComponent {
             default:
                 // catch-all for types that weren't anticipated
                 return (
-                    <div class="object-value">
+                    <div className="object-value">
                         {JSON.stringify(variable.value)}
                     </div>
                 );
@@ -285,7 +284,7 @@ class VariableEditor extends React.PureComponent {
                 }
                 {parseInput(editValue).type !== "boolean" &&
                     <AutosizeTextarea
-                        inputref={input => input && input.focus()}
+                        ref={input => input && input.focus()}
                         value={editValue}
                         class="variable-editor"
                         onChange={event => {

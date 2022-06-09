@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { toType } from './../helpers/util';
+import { toType } from '../helpers/util';
 
-//clibboard icon
+//clipboard icon
 import { Clippy } from './icons';
 
 //theme
@@ -87,7 +87,7 @@ export default class extends React.PureComponent {
     };
 
     render() {
-        const { src, theme, hidden, rowHovered } = this.props;
+        const { theme, hidden, rowHovered } = this.props;
         let style = Theme(theme, 'copy-to-clipboard').style;
         let display = 'inline';
 

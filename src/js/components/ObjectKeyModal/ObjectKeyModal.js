@@ -54,7 +54,7 @@ export default class extends React.PureComponent {
 
         return (
             <div
-                class="key-modal-request"
+                className="key-modal-request"
                 {...Theme(theme, 'key-modal-request')}
                 onClick={this.closeModal}
             >
@@ -68,7 +68,7 @@ export default class extends React.PureComponent {
                     <div style={{ position: 'relative' }}>
                         <input
                             {...Theme(theme, 'key-modal-input')}
-                            class="key-modal-input"
+                            className="key-modal-input"
                             spellCheck={false}
                             value={input}
                             placeholder="..."

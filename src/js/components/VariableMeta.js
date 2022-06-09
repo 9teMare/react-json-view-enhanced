@@ -2,7 +2,7 @@ import React from 'react';
 import dispatcher from './../helpers/dispatcher';
 
 import CopyToClipboard from './CopyToClipboard';
-import { toType } from './../helpers/util';
+import { toType } from '../helpers/util';
 
 //icons
 import { RemoveCircle as Remove, AddCircle as Add } from './icons';
@@ -15,7 +15,7 @@ export default class extends React.PureComponent {
         const { size, theme, displayObjectSize } = this.props;
         if (displayObjectSize) {
             return (
-                <span class="object-size" {...Theme(theme, 'object-size')}>
+                <span className="object-size" {...Theme(theme, 'object-size')}>
                     {size} item{size === 1 ? '' : 's'}
                 </span>
             );
@@ -27,7 +27,7 @@ export default class extends React.PureComponent {
 
         return (
             <span
-                class="click-to-add"
+                className="click-to-add"
                 style={{
                     verticalAlign: 'top',
                     display: rowHovered ? 'inline-block' : 'none'
@@ -78,7 +78,7 @@ export default class extends React.PureComponent {
     };
 
     getRemoveObject = rowHovered => {
-        const { theme, hover, namespace, name, src, rjvId } = this.props;
+        const { theme, namespace, name, src, rjvId } = this.props;
 
         //don't allow deleting of root node
         if (namespace.length === 1) {
@@ -86,7 +86,7 @@ export default class extends React.PureComponent {
         }
         return (
             <span
-                class="click-to-remove"
+                className="click-to-remove"
                 style={{
                     display: rowHovered ? 'inline-block' : 'none'
                 }}
@@ -127,7 +127,7 @@ export default class extends React.PureComponent {
         return (
             <div
                 {...Theme(theme, 'object-meta-data')}
-                class="object-meta-data"
+                className="object-meta-data"
                 onClick={e => {
                     e.stopPropagation();
                 }}
