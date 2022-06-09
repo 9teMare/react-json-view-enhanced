@@ -44,14 +44,15 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
-        use: [
-          {
-            loader: "babel-loader"
-          }
-        ],
-        include: [PATHS.js]
-      }
+        test: /\.(js|jsx)$/,
+        loader: "babel-loader",
+        include: [PATHS.js],
+        options: { presets: ['@babel/env','@babel/preset-react'] },
+      },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
     ]
   }
 }
