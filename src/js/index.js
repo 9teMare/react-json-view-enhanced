@@ -228,7 +228,6 @@ class ReactJsonView extends React.PureComponent {
     }
 
     updateSrc = () => {
-        console.log("index updateSrc");
         const {
             name,
             namespace,

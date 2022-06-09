@@ -1,6 +1,6 @@
 import React from 'react';
 import { polyfill } from 'react-lifecycles-compat';
-import { toType } from './../../helpers/util';
+import { toType } from '../../helpers/util';
 
 //data type components
 import { JsonObject } from './DataTypes';
@@ -14,7 +14,7 @@ import ObjectName from './../ObjectName';
 import AttributeStore from './../../stores/ObjectAttributes';
 
 //icons
-import { CollapsedIcon, ExpandedIcon } from './../ToggleIcons';
+import { CollapsedIcon, ExpandedIcon } from '../ToggleIcons';
 
 //theme
 import Theme from './../../themes/getStyle';

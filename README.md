@@ -2,7 +2,9 @@
 
 [![npm](https://img.shields.io/npm/v/react-json-view.svg)](https://www.npmjs.com/package/react-json-view-enhanced) [![npm](https://img.shields.io/npm/l/react-json-view-enhanced.svg)](https://github.com/kongxiaojun/react-json-view-enhanced/blob/master/LISCENSE) [![Build Status](https://travis-ci.org/mac-s-g/react-json-view.svg)](https://travis-ci.org/mac-s-g/react-json-view) [![Coverage Status](https://coveralls.io/repos/github/kongxiaojun/react-json-view-enhanced/badge.svg?branch=master)](https://coveralls.io/github/kongxiaojun/react-json-view-enhanced?branch=master)
 
-# react-json-view-enhanced
+# react-json-view-with-toggle
+This package is built on top of [react-json-view (RJV)](https://www.npmjs.com/package/react-json-view) and [react-json-view-enhanced](https://www.npmjs.com/package/react-json-view-enhanced). The main add-on of this package on top of the two is to display boolean values as toggles, this make viewing boolean values intuitive and editing more convenient (just by flipping the toggle).
+
 RJV is a React component for displaying and editing javascript **arrays** and **JSON objects**.
 
 This component provides a responsive interface for displaying arrays or JSON in a web browser.  NPM offers a distribution of the source that's transpiled to ES5; so you can include this component with *any web-based javascript application*.

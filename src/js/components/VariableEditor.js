@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AutosizeTextarea from 'react-textarea-autosize';
-
-import { toType } from './../helpers/util';
+import { toType } from '../helpers/util';
 import dispatcher from './../helpers/dispatcher';
 import parseInput from './../helpers/parseInput';
 import stringifyVariable from './../helpers/stringifyVariable';
 import CopyToClipboard from './CopyToClipboard';
+import Toggle from 'react-toggle'
+import "react-toggle/style.css"
 
 //data type components
 import {
@@ -26,6 +27,7 @@ import { Edit, CheckCircle, RemoveCircle as Remove } from './icons';
 
 //theme
 import Theme from './../themes/getStyle';
+import boolean from './DataTypes/Boolean';
 
 class VariableEditor extends React.PureComponent {
     constructor(props) {
@@ -39,10 +41,10 @@ class VariableEditor extends React.PureComponent {
             parsedInput: {
                 type: false,
                 value: null
-            }
+            },
+            isEnabled: !!this.props.variable.value
         };
     }
-
     render() {
         const {
             variable,
@@ -74,7 +76,7 @@ class VariableEditor extends React.PureComponent {
                 class="variable-row"
                 key={variable.name}
             >
-                {type == 'array' ? (
+                {type === 'array' ? (
                     displayArrayKey ? (
                         <span
                             {...Theme(theme, 'array-key')}
@@ -257,48 +259,69 @@ class VariableEditor extends React.PureComponent {
 
     getEditInput = () => {
         const { theme, fixedType } = this.props;
-        const { editValue } = this.state;
-
+        const { editValue, isEnabled } = this.state;
         return (
             <div>
-                <AutosizeTextarea
-                    type="text"
-                    inputRef={input => input && input.focus()}
-                    value={editValue}
-                    class="variable-editor"
-                    onChange={event => {
-                        const value = event.target.value;
-                        const detected = parseInput(value);
-                        this.setState({
-                            editValue: value,
-                            parsedInput: {
-                                type: detected.type,
-                                value: detected.value
-                            }
-                        });
-                    }}
-                    onKeyDown={e => {
-                        switch (e.key) {
-                            case 'Escape': {
-                                this.setState({
-                                    editMode: false,
-                                    editValue: ''
-                                });
-                                break;
-                            }
-                            case 'Enter': {
-                                if (e.ctrlKey || e.metaKey) {
-                                    this.submitEdit(true);
+                {parseInput(editValue).type === "boolean" &&
+                    // <div style={{display: "flex", lineHeight: 2,}}>
+                    <div {...Theme(theme, 'boolean')}>
+                        <Toggle checked={isEnabled}
+                                icons={false}
+                                onChange={() => {
+                                    const value = parseInput(editValue);
+                                    this.setState({
+                                        editValue: value.value.toString(),
+                                        parsedInput: {
+                                            type: value.type,
+                                            value: !value.value
+                                        },
+                                        isEnabled: !isEnabled
+                                    });
+                                }}/>
+                        <div style={isEnabled ? {fontSize: 11, marginLeft: 6, color: "green"} : {fontSize: 11, marginLeft: 6, color: "red"}}>
+                            {isEnabled.toString()}
+                        </div>
+                    </div>
+                }
+                {parseInput(editValue).type !== "boolean" &&
+                    <AutosizeTextarea
+                        inputref={input => input && input.focus()}
+                        value={editValue}
+                        class="variable-editor"
+                        onChange={event => {
+                            const value = event.target.value;
+                            const detected = parseInput(value);
+                            this.setState({
+                                editValue: value,
+                                parsedInput: {
+                                    type: detected.type,
+                                    value: detected.value
                                 }
-                                break;
+                            });
+                        }}
+                        onKeyDown={e => {
+                            switch (e.key) {
+                                case 'Escape': {
+                                    this.setState({
+                                        editMode: false,
+                                        editValue: ''
+                                    });
+                                    break;
+                                }
+                                case 'Enter': {
+                                    if (e.ctrlKey || e.metaKey) {
+                                        this.submitEdit(true);
+                                    }
+                                    break;
+                                }
                             }
-                        }
-                        e.stopPropagation();
-                    }}
-                    placeholder="update this value"
-                    minRows={2}
-                    {...Theme(theme, 'edit-input')}
-                />
+                            e.stopPropagation();
+                        }}
+                        placeholder="update this value"
+                        minRows={2}
+                        {...Theme(theme, 'edit-input')}
+                    />
+                }
                 <div {...Theme(theme, 'edit-icon-container')}>
                     <Remove
                         class="edit-cancel"

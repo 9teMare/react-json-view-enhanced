@@ -20,23 +20,19 @@ ReactDom.render(
             quotesOnKeys={false}
             collapseStringsAfterLength={12}
             onEdit={e => {
-                console.log('edit callback', e);
+                //console.log('edit callback', e);
                 if (e.new_value == 'error') {
                     return false;
                 }
             }}
             onDelete={e => {
-                console.log('delete callback', e);
+                //console.log('delete callback', e);
             }}
             onAdd={e => {
-                console.log('add callback', e);
+                //console.log('add callback', e);
                 if (e.new_value == 'error') {
                     return false;
                 }
-            }}
-            onSelect={e => {
-                console.log('select callback', e);
-                console.log(e.namespace);
             }}
             displayObjectSize={true}
             name={'dev-server'}
@@ -55,7 +51,6 @@ ReactDom.render(
             fixedType={true}
             typeInvalidMessage={"input value type error"}
         />
-
         <br />
 
         {/* use a base16 theme */}
@@ -185,7 +180,7 @@ function getExampleJson1() {
         integer: 42,
         empty_array: [],
         empty_object: {},
-        array: [1, 2, 3, 'test'],
+        array: [1, 2, 3, 'test', true, false],
         float: -2.757,
         undefined_var: undefined,
         parent: {
