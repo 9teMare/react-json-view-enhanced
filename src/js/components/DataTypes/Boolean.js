@@ -16,7 +16,10 @@ export default class extends React.PureComponent {
                 <div style={{display: "flex", lineHeight: 2, transform: "translate(0, -2px)"}}>
                     <DataTypeLabel type_name={type_name} {...props}/>
                     <div style={{marginTop: 2}}>
-                        <Toggle checked={props.value} icons={false} disabled={true}/>
+                        <Toggle checked={props.value} icons={false} disabled={!props.editMode}
+                                onChange={props.onChange}
+                                onBlur={props.submitEdit}
+                        />
                     </div>
                     <div style={props.value ? {fontSize: 11, marginLeft: 6, color: "green"} : {fontSize: 11, marginLeft: 6, color: "red"}}>
                     {props.value.toString()}

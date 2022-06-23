@@ -118,11 +118,12 @@ class VariableEditor extends React.PureComponent {
                                   ) {
                                       this.prepopInput(variable);
                                   } else if (onSelect !== false) {
-                                      location.shift();
-                                      onSelect({
-                                          ...variable,
-                                          namespace: location
-                                      });
+                                      // location.shift();
+                                      // onSelect({
+                                      //     ...variable,
+                                      //     namespace: location
+                                      // });
+                                      this.prepopInput(variable);
                                   }
                               }
                     }
@@ -141,6 +142,8 @@ class VariableEditor extends React.PureComponent {
                         {...{ theme, namespace: [...namespace, variable.name] }}
                     />
                 ) : null}
+                {/*edit is still enabled, edit icon is hidden, this is a naive implementation*/}
+
                 {onEdit !== false && editMode === false
                     ? this.getEditIcon()
                     : null}
@@ -256,37 +259,81 @@ class VariableEditor extends React.PureComponent {
         }
     };
 
+    onToggleChange(isEnabled) {
+        this.setState({
+            // editValue: value.value.toString(),
+            // parsedInput: {
+            //     type: value.type,
+            //     value: !value.value
+            // },
+            isEnabled: !isEnabled
+        });
+    }
+
     getEditInput = () => {
         const { theme, fixedType } = this.props;
-        const { editValue, isEnabled } = this.state;
+        const { editValue, isEnabled, actualValue } = this.state;
+        const type = parseInput(editValue).type;
         return (
             <div>
-                {parseInput(editValue).type === "boolean" &&
+                {type === "boolean" &&
                     // <div style={{display: "flex", lineHeight: 2,}}>
                     <div {...Theme(theme, 'boolean')}>
-                        <Toggle checked={isEnabled}
-                                icons={false}
-                                onChange={() => {
-                                    const value = parseInput(editValue);
-                                    this.setState({
-                                        editValue: value.value.toString(),
-                                        parsedInput: {
-                                            type: value.type,
-                                            value: !value.value
-                                        },
-                                        isEnabled: !isEnabled
-                                    });
-                                }}/>
-                        <div style={isEnabled ? {fontSize: 11, marginLeft: 6, color: "green"} : {fontSize: 11, marginLeft: 6, color: "red"}}>
-                            {isEnabled.toString()}
-                        </div>
+                        <JsonBoolean value={isEnabled} editMode={true}
+                                     onChange={() => {
+                                         this.setState({
+                                            editValue: isEnabled.toString(),
+                                            parsedInput: {
+                                                type: "boolean",
+                                                value: !isEnabled
+                                            },
+                                            isEnabled: !isEnabled
+                                        })
+                                     }}
+                                     {...this.props}
+                                    submitEdit={() => this.submitEdit(true)}
+                        />;
+                        {/*<Toggle checked={isEnabled}*/}
+                        {/*        icons={false}*/}
+                        {/*        onChange={() => {*/}
+                        {/*            const value = parseInput(editValue);*/}
+                        {/*            this.setState({*/}
+                        {/*                editValue: value.value.toString(),*/}
+                        {/*                parsedInput: {*/}
+                        {/*                    type: value.type,*/}
+                        {/*                    value: !value.value*/}
+                        {/*                },*/}
+                        {/*                isEnabled: !isEnabled*/}
+                        {/*            });*/}
+                        {/*        }}*/}
+                        {/*        onKeyDown={e => {*/}
+                        {/*            switch (e.key) {*/}
+                        {/*                case 'Escape': {*/}
+                        {/*                    this.setState({*/}
+                        {/*                        editMode: false,*/}
+                        {/*                        editValue: ''*/}
+                        {/*                    });*/}
+                        {/*                    break;*/}
+                        {/*                }*/}
+                        {/*                case 'Enter': {*/}
+                        {/*                    this.submitEdit(true);*/}
+                        {/*                    break;*/}
+                        {/*                }*/}
+                        {/*            }*/}
+                        {/*            e.stopPropagation();*/}
+                        {/*        }}*/}
+                        {/*/>*/}
+                        {/*<div style={isEnabled ? {fontSize: 11, marginLeft: 6, color: "green"} : {fontSize: 11, marginLeft: 6, color: "red"}}>*/}
+                        {/*    {isEnabled.toString()}*/}
+                        {/*</div>*/}
                     </div>
                 }
-                {parseInput(editValue).type !== "boolean" &&
-                    <AutosizeTextarea
+                {type !== "boolean" &&
+                    fixedType &&
+                    <input
                         ref={input => input && input.focus()}
                         value={editValue}
-                        class="variable-editor"
+                        className="variable-editor"
                         onChange={event => {
                             const value = event.target.value;
                             const detected = parseInput(value);
@@ -298,6 +345,11 @@ class VariableEditor extends React.PureComponent {
                                 }
                             });
                         }}
+                        type={type === "integer" || type === "float" ? "number" : "text"}
+                        onBlur={e => {
+                            this.submitEdit(true)
+                            e.stopPropagation();
+                        }}
                         onKeyDown={e => {
                             switch (e.key) {
                                 case 'Escape': {
@@ -308,9 +360,49 @@ class VariableEditor extends React.PureComponent {
                                     break;
                                 }
                                 case 'Enter': {
-                                    if (e.ctrlKey || e.metaKey) {
-                                        this.submitEdit(true);
-                                    }
+                                    this.submitEdit(true);
+                                    break;
+                                }
+                            }
+                            e.stopPropagation();
+                        }}
+                        placeholder="update this value"
+                        {...Theme(theme, 'edit-input')}
+                    />
+                }
+                {type !== "boolean" &&
+                    !fixedType &&
+                    <AutosizeTextarea
+                        ref={input => input && input.focus()}
+                        value={editValue}
+                        className="variable-editor"
+                        onChange={event => {
+                            const value = event.target.value;
+                            const detected = parseInput(value);
+                            this.setState({
+                                editValue: value,
+                                parsedInput: {
+                                    type: detected.type,
+                                    value: detected.value
+                                }
+                            });
+                        }}
+                        type={type === "integer" || "float" ? "number" : "text"}
+                        onBlur={e => {
+                            this.submitEdit(true)
+                            e.stopPropagation();
+                        }}
+                        onKeyDown={e => {
+                            switch (e.key) {
+                                case 'Escape': {
+                                    this.setState({
+                                        editMode: false,
+                                        editValue: ''
+                                    });
+                                    break;
+                                }
+                                case 'Enter': {
+                                    this.submitEdit(true);
                                     break;
                                 }
                             }
@@ -476,7 +568,7 @@ class VariableEditor extends React.PureComponent {
                 case 'float':
                     return <JsonFloat value={value} {...props} />;
                 case 'boolean':
-                    return <JsonBoolean value={value} {...props} />;
+                    return <JsonBoolean value={value} editMode={false} {...props} />;
                 case 'function':
                     return <JsonFunction value={value} {...props} />;
                 case 'null':

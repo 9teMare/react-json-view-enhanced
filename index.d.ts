@@ -122,7 +122,7 @@ export interface ReactJsonViewProps {
    *
    * Default: false
    */
-  onSelect?: ((select: OnSelectProps) => void) | false;
+  onSelect?: ((select: InteractionProps) => void) | false;
   /**
    * Custom message for validation failures to onEdit, onAdd, or onDelete callbacks.
    *

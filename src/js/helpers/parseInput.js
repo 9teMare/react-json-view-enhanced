@@ -68,7 +68,7 @@ export default function parseInput(input) {
         }
     }
 
-    return formatResponse(false, null);
+    return formatResponse("string", input);
 }
 
 function formatResponse(type, value) {

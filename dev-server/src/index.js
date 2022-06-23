@@ -19,26 +19,31 @@ ReactDom.render(
             src={getExampleJson1()}
             quotesOnKeys={false}
             collapseStringsAfterLength={12}
+            onSelect={select => {
+                if (select.new_value == 'error') {
+                    return false;
+                }
+            }}
             onEdit={e => {
-                //console.log('edit callback', e);
                 if (e.new_value == 'error') {
                     return false;
                 }
             }}
-            onDelete={e => {
-                //console.log('delete callback', e);
-            }}
-            onAdd={e => {
-                //console.log('add callback', e);
-                if (e.new_value == 'error') {
-                    return false;
-                }
-            }}
+            // onDelete={e => {
+            //     //console.log('delete callback', e);
+            // }}
+            // onAdd={e => {
+            //     //console.log('add callback', e);
+            //     if (e.new_value == 'error') {
+            //         return false;
+            //     }
+            // }}
             displayObjectSize={true}
             name={'dev-server'}
-            enableClipboard={copy => {
-                console.log('you copied to clipboard!', copy);
-            }}
+            // enableClipboard={copy => {
+            //     console.log('you copied to clipboard!', copy);
+            // }}
+            enableClipboard={false}
             shouldCollapse={({ src, namespace, type }) => {
                 if (type === 'array' && src.indexOf('test') > -1) {
                     return true;

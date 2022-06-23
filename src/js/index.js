@@ -237,7 +237,7 @@ class ReactJsonView extends React.PureComponent {
             updated_src,
             type
         } = ObjectAttributes.get(this.rjvId, 'action', 'variable-update');
-        const { onEdit, onDelete, onAdd } = this.props;
+        const { onEdit, onSelect, onDelete, onAdd } = this.props;
 
         const { src } = this.state;
 
